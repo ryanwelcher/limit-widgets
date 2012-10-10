@@ -28,7 +28,7 @@ class LimitWidgets
 		global $wp_registered_sidebars;
 		foreach ($wp_registered_sidebars as $key => $value) 
 		{
-			$this->sidebars[] = $value['id'];
+			$this->sidebars[] = array( "id"=>$value['id'], "name"=>$value['name'] );
 		}
 
 		//enqueue scripts in the wordpress admin
@@ -102,7 +102,7 @@ class LimitWidgets
 
 		//add a setting field for each sidebar
 		foreach ($this->sidebars as $key => $value) {
-			add_settings_field('sidebar-'.$value, $value.' Limit:', array( &$this, 'limitw_setting_string'), 'limitw_main', 'limitw_main', array( 'sidebar-id'=>$value ));
+			add_settings_field('sidebar-'.$value['id'], $value['name'].' limit:', array( &$this, 'limitw_setting_string'), 'limitw_main', 'limitw_main', array( 'sidebar-id'=>$value['id'] ));
 		}
 		
 	}
@@ -120,7 +120,7 @@ class LimitWidgets
 		
 		$sidebarId = $args['sidebar-id'];
 		$options = get_option('limitw_limits_options');
-		echo "<input name='limitw_limits_options[".$sidebarId."]' length ='40' type='text' value='".$options[$sidebarId]."'/>";
+		echo "<input name='limitw_limits_options[".$sidebarId."]' type='number' min='0' max='999' value='".$options[$sidebarId]."'/>";
 	}
 
 	
@@ -134,17 +134,17 @@ class LimitWidgets
 			//right now these are evaluated as boolean (0 or 1)
 			//but these need to be evaluated as integers
 			//TODO
-			$validatedArray[$value] = trim($input[$value]);
+			$validatedArray[$value['id']] = trim($input[$value['id']]);
 			
-			if( (!is_numeric($validatedArray[$value])) || ($validatedArray[$value] < 0)) 
+			if( (!is_numeric($validatedArray[$value['id']])) || ($validatedArray[$value['id']] < 0)) 
 			{	
 				//set an empty string
-				$validatedArray[$value] = "";
+				$validatedArray[$value['id']] = "";
 			}//if
 			else
 			{
 				//after we've weeded out the empty values & non numbers now we can type cast to an integer
-				$validatedArray[$value] = (int) $validatedArray[$value];
+				$validatedArray[$value['id']] = (int) $validatedArray[$value['id']];
 			}
 
 		}
