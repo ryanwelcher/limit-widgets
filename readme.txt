@@ -85,6 +85,6 @@ This plugin is based on JavaScript. If you have a client who likes to break the 
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 
 * Initial release
