@@ -55,9 +55,7 @@ __Author__
 = What do the different colors in the WordPress admin section mean? =
 
 * _Blue_: If you have a sidebar that has reached the maximum number of widets allowed. 
-
 * _Red_: If you have a sidebar that has more widets than is allowed. 
-
 * _No color_: If your sidebar doesn't have a limit or the number of widgets in the sidebar is less than the limit there is  applied to the sidebar.
 
 
@@ -66,7 +64,6 @@ __Author__
 There are two likely ways to get a sidebar that has more widets than allowed.
 
 1. You set the maximum number of widgets on a sidebar that was already too full.
-
 2. Someone disabled the JavaScript. See the next question.
 
 
@@ -78,7 +75,6 @@ This plugin is based on JavaScript. If you have a client who likes to break the 
 == Screenshots ==
 
 1. A sidebar that is full.
-
 2. A sidebar that is beyond full. Normally this happens when you limit an existing sidebar.
 
 
