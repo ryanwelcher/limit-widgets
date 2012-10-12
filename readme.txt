@@ -1,4 +1,4 @@
-=== Font Awesome Icons ===
+=== Limit Widgets ===
 Contributors: BFTrick
 Tags: widget, sidebar, dynamic sidebar, limit, restrict
 Requires at least: 3.0
