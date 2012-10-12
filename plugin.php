@@ -3,7 +3,7 @@
 Plugin Name: Limit Widgets
 Plugin URI: 
 Description: This plugin allows you to limit the number of widgets placed in a sidebar. It also provides a nice to UI to the user to let them know they are at the limit.
-Version: 1.0.0
+Version: 1.0.1
 Author: Patrick Rauland
 Author URI: http://www.patrickrauland.com
 

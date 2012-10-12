@@ -3,7 +3,7 @@ Contributors: BFTrick
 Tags: widget, sidebar, dynamic sidebar, limit, restrict
 Requires at least: 3.0
 Tested up to: 3.4.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -80,6 +80,10 @@ This plugin is based on JavaScript. If you have a client who likes to break the 
 
 
 == Changelog ==
+
+= 1.0.1 =
+
+* Updating readme.txt file
 
 = 1.0.0 =
 
