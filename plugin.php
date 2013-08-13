@@ -50,17 +50,21 @@ class LimitWidgets
 			//get sidebar data from DB
 			$sidebarLimits = get_option('limitw_limits_options');
 
-			//remove empty values
-			foreach ($sidebarLimits as $key => $value) 
-			{
-				if($value==="")
+			// check to make sure we have some limitations
+			if ( is_array( $sidebarLimits ) ) {
+				// print_r($sidebarLimits); exit();
+				foreach ( $sidebarLimits as $key => $value ) 
 				{
-					unset($sidebarLimits[$key]);
+					// remove empty values
+					if($value==="")
+					{
+						unset($sidebarLimits[$key]);
+					}
 				}
-			}
 
-			//pass data to JS file
-			wp_localize_script( 'limit-widgets-js', 'sidebarLimits', $sidebarLimits );
+				// pass data to JS file
+				wp_localize_script( 'limit-widgets-js', 'sidebarLimits', $sidebarLimits );
+			}
 		}
 	}
 
@@ -101,8 +105,10 @@ class LimitWidgets
 		add_settings_section('limitw_main', 'Limit Widgets Main Settings', array( &$this, 'limitw_section_text') , 'limitw_main');
 
 		//add a setting field for each sidebar
-		foreach ($this->sidebars as $key => $value) {
-			add_settings_field('sidebar-'.$value['id'], $value['name'].' limit:', array( &$this, 'limitw_setting_string'), 'limitw_main', 'limitw_main', array( 'sidebar-id'=>$value['id'] ));
+		if( is_array( $this->sidebars ) ) {
+			foreach ($this->sidebars as $key => $value) {
+				add_settings_field('sidebar-'.$value['id'], $value['name'].' limit:', array( &$this, 'limitw_setting_string'), 'limitw_main', 'limitw_main', array( 'sidebar-id'=>$value['id'] ));
+			}
 		}
 		
 	}
@@ -110,8 +116,12 @@ class LimitWidgets
 	public function limitw_section_text() 
 	{
 		//print some text so the user knows what to do in this section
-		
-		echo '<p>Just type the maximum number of widgets you would like in each sidebar. If you don&#39;t want to set a maximum then just leave it blank.</p>';
+		if( is_array( $this->sidebars ) ) {
+			echo "<p>" . __("Just type the maximum number of widgets you would like in each sidebar. If you don&#39;t want to set a maximum then just leave it blank.", "limit-widgets") . "</p>";
+			}
+		else{
+			echo "<p>" . __("test", "limit-widgets") . "</p>";
+		}
 	}
 
 	public function limitw_setting_string($args) 
