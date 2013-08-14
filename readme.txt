@@ -81,9 +81,13 @@ This plugin is based on JavaScript. If you have a client who likes to break the 
 
 == Changelog ==
 
+= 1.0.2 =
+
+* Fix - PHP notices for an empty widget area
+
 = 1.0.1 =
 
-* Updating readme.txt file
+* Tweak - Updating readme.txt file
 
 = 1.0.0 =
 
