@@ -1,9 +1,9 @@
-.sidebar-full
+.sidebar-full-display
 {
-    background-color: #cfe1ef !important;
+    border:solid 2px #0c548c;
 }
 
-.sidebar-morethanfull
+.sidebar-morethanfull-display
 {
-    background-color: #c43 !important;
+    border:solid 2px #c43;
 }

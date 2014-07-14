@@ -38,6 +38,11 @@ class LimitWidgets
 		add_action('admin_menu', array(&$this, 'limitw_admin_menu'));
 		add_action('admin_init', array(&$this, 'options_limitw_page_settings_fields'));
 
+		
+		//add the settings link on the plugin screen
+		add_filter('network_admin_plugin_action_links_'.  plugin_basename( __FILE__ ) ,  array( &$this,'limitw_filter_action_links')); 
+		add_filter('plugin_action_links_' .  plugin_basename( __FILE__  )  , array(&$this,'limitw_filter_action_links')); 
+
 	}
 
 	public function limitw_admin_enqueue_scripts( $hook_suffix )
@@ -87,7 +92,7 @@ class LimitWidgets
 		//show the form
 		echo '<div class="wrap">';
 		echo '<div id="icon-options-general" class="icon32"><br></div>';
-		echo '<h2>Limit Widgets Settings</h2>';
+		echo '<h2>'._('Limit Widgets Settings','limit-widgets') . '</h2>';
 		echo '<form method="post" action="options.php"> ';
 		settings_fields( 'limitw_limits_options' );
 		do_settings_sections( 'limitw_main' );
@@ -110,8 +115,23 @@ class LimitWidgets
 				add_settings_field('sidebar-'.$value['id'], $value['name'].' limit:', array( &$this, 'limitw_setting_string'), 'limitw_main', 'limitw_main', array( 'sidebar-id'=>$value['id'] ));
 			}
 		}
-		
+	
 	}
+
+
+
+	/**
+	 * Add the settings panel to the plugin page
+	 * @param array The links for the plugin
+	 * @return array
+	 */
+	function limitw_filter_action_links($links) {
+		$links['settings'] = sprintf( '<a href="%s"> %s </a>', admin_url( 'options-general.php?page=options-limit-widgets.php' ), __( 'Settings', 'plugin_domain' ) );
+		return $links;
+	}
+
+
+
 
 	public function limitw_section_text() 
 	{
