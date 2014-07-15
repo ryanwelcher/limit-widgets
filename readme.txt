@@ -2,8 +2,8 @@
 Contributors: BFTrick
 Tags: widget, sidebar, dynamic sidebar, limit, restrict
 Requires at least: 3.0
-Tested up to: 3.4.2
-Stable tag: 1.0.1
+Tested up to: 3.9.1
+Stable tag: 1.0.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -78,8 +78,12 @@ This plugin is based on JavaScript. If you have a client who likes to break the 
 2. A sidebar that is beyond full. Normally this happens when you limit an existing sidebar.
 
 
-
 == Changelog ==
+
+= 1.0.3 =
+
+* Updating admin side CSS to play nicely new layout.
+* Adding link from plugins page to settings page.
 
 = 1.0.2 =
 
