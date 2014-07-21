@@ -52,4 +52,30 @@ jQuery( function( $ ) {
 	$( 'a.widget-control-remove' ).live( 'click', function() {
 		checkLength( $( this ).closest( 'div.widgets-sortables' )[0], -1 );
 	} );
+
+	/**
+	 * we don't want to be able to add new widgets from the inline chooser
+	 */
+
+	//copy the original method for later use
+	wpStandardAddWidget = wpWidgets.addWidget;
+
+	/**
+	 * override the existing method so we can choose what to do
+	 */
+	wpWidgets.addWidget = function( chooser ) {
+
+		var sidebarId = chooser.find( '.widgets-chooser-selected' ).data('sidebarId'),
+			sidebar = $( '#' + sidebarId );
+
+		//if there is no added class - act normally
+		if( false === sidebar.hasClass('sidebar-full') ) {
+			wpStandardAddWidget( chooser );
+
+			//recall the map functionalty to update the view
+			realSidebars.map( function() {
+				checkLength( this );
+			} );
+		}
+	}
 } );
