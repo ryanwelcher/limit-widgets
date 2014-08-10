@@ -3,7 +3,7 @@
 Plugin Name: Limit Widgets
 Plugin URI: 
 Description: This plugin allows you to limit the number of widgets placed in a sidebar. It also provides a nice to UI to the user to let them know they are at the limit.
-Version: 1.0.3
+Version: 1.0.4
 Author: Patrick Rauland
 Author URI: http://www.patrickrauland.com
 
@@ -92,12 +92,12 @@ class LimitWidgets
 		//show the form
 		echo '<div class="wrap">';
 		echo '<div id="icon-options-general" class="icon32"><br></div>';
-		echo '<h2>'._('Limit Widgets Settings','limit-widgets') . '</h2>';
+		echo '<h2>'._e('Limit Widgets Settings','limit-widgets') . '</h2>';
 		echo '<form method="post" action="options.php"> ';
 		settings_fields( 'limitw_limits_options' );
 		do_settings_sections( 'limitw_main' );
 		submit_button(); 
-		echo '</form>';
+		echo '</form>';	
 		echo '</div>';
 		echo '</div>';
 	}
@@ -150,7 +150,8 @@ class LimitWidgets
 		
 		$sidebarId = $args['sidebar-id'];
 		$options = get_option('limitw_limits_options');
-		echo "<input name='limitw_limits_options[".$sidebarId."]' type='number' min='0' max='999' value='".$options[$sidebarId]."'/>";
+		$val = isset( $options[$sidebarId] ) ? esc_attr( $options[$sidebarId] )  : '';
+		echo "<input name='limitw_limits_options[".$sidebarId."]' type='number' min='0' max='999' value='".$val."'/>";
 	}
 
 	
