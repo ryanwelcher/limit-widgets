@@ -81,6 +81,11 @@ This plugin is based on JavaScript. If you have a client who likes to break the 
 
 == Changelog ==
 
+= 1.0.4 =
+
+* fixed a bug where users could add more widgets via the inline tool
+* added additional author
+
 = 1.0.3 =
 
 * Updating admin side CSS to play nicely new layout.
