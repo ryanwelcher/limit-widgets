@@ -35,6 +35,9 @@ __Contributors Welcome__
 __Author__
 
 *   [Patrick Rauland](http://www.patrickrauland.com)
+
+__Currently Maintained By__
+
 *	[Ryan Welcher](http://www.ryanwelcher.com)
 
 
