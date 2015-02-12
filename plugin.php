@@ -3,7 +3,7 @@
 Plugin Name: Limit Widgets
 Plugin URI: 
 Description: This plugin allows you to limit the number of widgets placed in a sidebar. It also provides a nice to UI to the user to let them know they are at the limit.
-Version: 1.0.4
+Version: 1.0.5
 Author: Patrick Rauland
 Author URI: http://www.patrickrauland.com
 
@@ -35,25 +35,25 @@ class LimitWidgets
 		add_action( 'admin_enqueue_scripts', array( &$this, 'limitw_admin_enqueue_scripts' ) );
 
 		//add submenu for configuring options
-		add_action('admin_menu', array(&$this, 'limitw_admin_menu'));
-		add_action('admin_init', array(&$this, 'options_limitw_page_settings_fields'));
+		add_action( 'admin_menu', array( &$this, 'limitw_admin_menu' ) );
+		add_action( 'admin_init', array( &$this, 'options_limitw_page_settings_fields' ) );
 
 		
 		//add the settings link on the plugin screen
-		add_filter('network_admin_plugin_action_links_'.  plugin_basename( __FILE__ ) ,  array( &$this,'limitw_filter_action_links')); 
-		add_filter('plugin_action_links_' .  plugin_basename( __FILE__  )  , array(&$this,'limitw_filter_action_links')); 
+		add_filter( 'network_admin_plugin_action_links_'.  plugin_basename( __FILE__ ) ,  array( &$this,'limitw_filter_action_links' ) );
+		add_filter( 'plugin_action_links_' .  plugin_basename( __FILE__  )  , array( &$this,'limitw_filter_action_links' ) );
 
 	}
 
 	public function limitw_admin_enqueue_scripts( $hook_suffix )
 	{
 		//if on the widgets page enquque the scripts
-		if ( $hook_suffix == 'widgets.php' ) {
-			wp_enqueue_script( 'limit-widgets-js', plugins_url( "/assets/script.js" , __FILE__ ), array(), false, true );
-			wp_enqueue_style( 'limit-widgets-css', plugins_url( "/assets/style.css" , __FILE__ ) );
+		if ( 'widgets.php' == $hook_suffix ) {
+			wp_enqueue_script( 'limit-widgets-js', plugins_url( '/assets/script.js' , __FILE__ ), array(), false, true );
+			wp_enqueue_style( 'limit-widgets-css', plugins_url( '/assets/style.css' , __FILE__ ) );
 
 			//get sidebar data from DB
-			$sidebarLimits = get_option('limitw_limits_options');
+			$sidebarLimits = get_option( 'limitw_limits_options' );
 
 			// check to make sure we have some limitations
 			if ( is_array( $sidebarLimits ) ) {
@@ -61,9 +61,9 @@ class LimitWidgets
 				foreach ( $sidebarLimits as $key => $value ) 
 				{
 					// remove empty values
-					if($value==="")
+					if ( $value === '' )
 					{
-						unset($sidebarLimits[$key]);
+						unset( $sidebarLimits[ $key ] );
 					}
 				}
 
@@ -77,7 +77,7 @@ class LimitWidgets
 	{
 		//add a submenu for configuration options
 
-		add_options_page('Limit Widgets Options', 'Limit Widgets', 'manage_options', 'options-limit-widgets.php', array($this, 'options_limitw_page'));
+		add_options_page( 'Limit Widgets Options', 'Limit Widgets', 'manage_options', 'options-limit-widgets.php', array( $this, 'options_limitw_page' ) );
 	}
 
 	public function options_limitw_page() 
@@ -85,7 +85,7 @@ class LimitWidgets
 		//print out the content on the limit widgets settings page
 
 		//kick the user out if he doesn't have sufficient permissions
-		if ( !current_user_can( 'manage_options' ) )  {
+		if ( ! current_user_can( 'manage_options' ) )  {
 			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
 
