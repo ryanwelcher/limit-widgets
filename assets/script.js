@@ -6,6 +6,7 @@ jQuery( function( $ ) {
 
 	var realSidebars = $( '#widgets-right div.widgets-sortables' );
 	var availableWidgets = $( '#widget-list' ).children( '.widget' );
+	var myCount = 0;
 
 	var checkLength = function( sidebar, delta ) {
 		var sidebarId = sidebar.id;
@@ -28,7 +29,7 @@ jQuery( function( $ ) {
 
 		availableWidgets.draggable( 'option', 'connectToSortable', notFullSidebars );
 		realSidebars.sortable( 'option', 'connectWith', notFullSidebars );
-	}
+	};
 
 	// Check existing sidebars on startup
 	realSidebars.map( function() {
@@ -66,7 +67,10 @@ jQuery( function( $ ) {
 	wpWidgets.addWidget = function( chooser ) {
 
 		var sidebarId = chooser.find( '.widgets-chooser-selected' ).data('sidebarId'),
-			sidebar = $( '#' + sidebarId );
+			sidebar = $( '#' + sidebarId),
+			limit_message,
+			count = 0,
+			messages = ['Widget Limit Reached', 'Yup, still full', 'Really?', 'Ok. This time you can add a new one', 'Just kidding, it\'s full.' ];
 
 		//if there is no added class - act normally
 		if( false === sidebar.hasClass('sidebar-full') ) {
@@ -76,6 +80,20 @@ jQuery( function( $ ) {
 			realSidebars.map( function() {
 				checkLength( this );
 			} );
+		} else {
+			sidebar.append('<div id="limit-message" class="limit-reached-message">' +  messages[myCount] + '</div>');
+
+			if( myCount < messages.length - 1 ) {
+
+				myCount++;
+			} else {
+				myCount = 0;
+			}
+
+			limit_message = $('#limit-message');
+			limit_message.delay('1000').fadeOut('3000', function(){
+				limit_message.remove();
+			});
 		}
 	}
 } );
