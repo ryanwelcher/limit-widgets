@@ -7,3 +7,12 @@
 {
     border:solid 2px #c43;
 }
+
+
+.limit-reached-message {
+    border:solid 2px #c43;
+    background: #c43 ;
+    text-align: center;
+    padding:5px 0;
+    color:white;
+}
