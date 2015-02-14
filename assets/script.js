@@ -9,6 +9,10 @@ jQuery( function( $ ) {
 
 		wpStandardAddWidget : null,
 
+		add_attempt_count : 0,
+
+		attempt_messages : ['Widget Limit Reached', 'Yup, still full', 'Really?', 'Ok. This time you can add a new one', 'Just kidding, it\'s full.' ],
+
 		checkLength : function( sidebar, delta  ) {
 			var sidebarId = sidebar.id,
 				widgets,
@@ -68,7 +72,8 @@ jQuery( function( $ ) {
 			wpWidgets.addWidget = function (chooser) {
 
 				var sidebarId = chooser.find('.widgets-chooser-selected').data('sidebarId'),
-					sidebar = $('#' + sidebarId);
+					sidebar = $('#' + sidebarId),
+					limit_message;
 
 				//if there is no added class - act normally
 				if (false === sidebar.hasClass('sidebar-full')) {
@@ -77,6 +82,20 @@ jQuery( function( $ ) {
 					//recall the map functionalty to update the view
 					realSidebars.map(function () {
 						that.checkLength(this);
+					});
+				} else {
+					sidebar.append('<div id="limit-message" class="limit-reached-message">' + that.attempt_messages[ that.add_attempt_count ] + '</div>');
+
+					if( that.add_attempt_count < that.attempt_messages.length - 1 ) {
+
+						that.add_attempt_count++;
+					} else {
+						that.add_attempt_count = 0;
+					}
+
+					limit_message = $('#limit-message');
+					limit_message.delay('1000').fadeOut('3000', function(){
+						limit_message.remove();
 					});
 				}
 			};
