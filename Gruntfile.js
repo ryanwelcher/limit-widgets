@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
 
+	// Load all grunt tasks
+	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -10,16 +12,15 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		jshint: {
+			all: ['assets/script.js']
+		},
 		watch: {
 			files: ['assets/script.js'],
-			tasks: ['uglify']
+			tasks: ['jshint', 'uglify']
 		}
 	});
 
-	// Load the plugin that provides the "uglify" task.
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-
 	// Default task(s).
-	grunt.registerTask('default', ['uglify']);
+	grunt.registerTask( 'default', ['jshint', 'uglify'] );
 };

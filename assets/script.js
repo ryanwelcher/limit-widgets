@@ -79,10 +79,9 @@ jQuery( function( $ ) {
 						that.checkLength(this);
 					});
 				}
-			}
+			};
 		}
 	};
-
 	//start the show
 	LIMIT_WIDGETS.init();
 });
