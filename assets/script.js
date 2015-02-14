@@ -11,7 +11,7 @@ jQuery( function( $ ) {
 
 		add_attempt_count : 0,
 
-		attempt_messages : ['Widget Limit Reached', 'Yup, still full', 'Really?', 'Ok. This time you can add a new one', 'Just kidding, it\'s full.' ],
+		attempt_messages : ['Widget Limit Reached.', 'Yup, still full.', 'Really?', 'Ok. This time you can add a new one.', 'Just kidding, it\'s full.' ],
 
 		checkLength : function( sidebar, delta  ) {
 			var sidebarId = sidebar.id,
