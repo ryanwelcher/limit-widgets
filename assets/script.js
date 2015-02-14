@@ -83,5 +83,6 @@ jQuery( function( $ ) {
 		}
 	};
 
+	//start the show
 	LIMIT_WIDGETS.init();
 });
