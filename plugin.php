@@ -49,7 +49,9 @@ class LimitWidgets
 	{
 		//if on the widgets page enquque the scripts
 		if ( 'widgets.php' == $hook_suffix ) {
-			wp_enqueue_script( 'limit-widgets-js', plugins_url( '/assets/script.js' , __FILE__ ), array(), false, true );
+
+			$postfix = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? '.js' : '.min.js';
+			wp_enqueue_script( 'limit-widgets-js', plugins_url( '/assets/script' . $postfix  , __FILE__ ), array(), false, true );
 			wp_enqueue_style( 'limit-widgets-css', plugins_url( '/assets/style.css' , __FILE__ ) );
 
 			//get sidebar data from DB
